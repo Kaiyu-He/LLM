@@ -1,0 +1,2 @@
+DOCKER_IMAGE_NAME=210.75.240.150:30003/hekaiyu/train
+docker run -it --rm --name=$DOCKER_CONTAINER_NAME --gpus all -p $(id -u):8888 -v /home/$(whoami):/$(whoami) -v /netcache/$(whoami):/mnt/publiccache/$(whoami) -v /netcache/huggingface:/mnt/publiccache/huggingface -v /netdisk/$(whoami):/mnt/userdata $DOCKER_IMAGE_NAME
