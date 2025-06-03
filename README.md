@@ -1,12 +1,58 @@
-# 
+# 创建 conda 环境
 
-1. 安装 anaconda 或 miniconda
-2. 创建虚拟环境
-```shell
-conda create
+1. 安装 anaconda 或 miniconda （linux）
+```bash
+# 下载
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+  && bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
+  && rm Miniconda3-latest-Linux-x86_64.sh 
+# 激活
+source /opt/conda/bin/activate
+# 初始化从conda环境
+conda init --all 
 ```
 
-# Github使用指南（待修）
+2. 创建虚拟环境
+```bash
+conda create -n train python=3.9 # 名字train + python 版本3.9
+```
+
+3. 激活虚拟环境
+```bash
+conda activate train # 激活虚拟环境
+conda deactivate # 退出当前虚拟环境到base
+conda env list # 查看现有虚拟环境
+```
+4. 设置 pip 路径 (若发现无法直接使用pip，将软件安装如虚拟环境中请输入如下代码)
+```bash
+alias pip='虚拟环境的位置/bin/pip'
+alias pip='/opt/conda/envs/train/bin/pip'
+```
+
+5. 安装 torch
+```bash
+pip install torch==2.3.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+6. 配置需要的包
+```bash
+wget -O requirements.txt https://www.pan.hekaiyu.com.cn/d/file/python/env/requirements.txt?sign=SmPNzV5IjN2sZL9p4iDz675aiVM7M4ASiB7JNoq2ceo=:0
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+
+7. 预先下载好的包
+```bash
+# flash attention——link: https://github.com/Dao-AILab/flash-attention/releases
+wget -O flash_attn.whl https://www.pan.hekaiyu.com.cn/d/file/python/env/flash_attn-2.5.9.post1%2Bcu122torch2.3cxx11abiFALSE-cp39-cp39-linux_x86_64.whl?sign=vLhTjFIATZySJXRgC-DKy1-QPsClehE3wwCL37FCTLs=:0
+pip install flash_attn.whl
+
+# deepspeed——link: https://github.com/deepspeedai/DeepSpeed/releases
+wget -O deepspeed.whl https://www.pan.hekaiyu.com.cn/d/file/python/env/deepspeed-0.14.2%2Bcu121torch2.3-cp39-cp39-manylinux_2_24_x86_64.whl?sign=hye9A04XMevsNhCRCE1lBMDrsu-jVeWSDg6GvgjDIJc=:0
+pip install deepspeed.whl
+```
+
+
+# Github使用指南（待修改）
 1. 将 Git 与 Github 绑定
 
 - 获取 ssh key
