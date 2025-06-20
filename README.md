@@ -4,4 +4,7 @@
 
 构建自己的conda环境
 
-## [模型结构]()
+## [Pytorch 函数操作](https://github.com/Kaiyu-He/LLM/tree/main/pytorch)
+
+## [模型结构](https://github.com/Kaiyu-He/LLM/tree/main/struction)
+
