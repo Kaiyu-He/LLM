@@ -1,7 +1,7 @@
-# 张量操作
 import torch
 
 # 张量创建
+
 m = torch.tensor([[1, 2], [3, 4]]) # 直接初始化
 rand_tensor = torch.rand(2, 3, 4)  # 3维张量（形状：2×3×4） 随机张量（均匀分布）
 zeros = torch.zeros(2, 3)  # 全零张量
@@ -9,8 +9,11 @@ ones = torch.ones(2, 3)    # 全一张量
 eye = torch.eye(3)         # 单位矩阵
 B = torch.tensor((1, 2, 3), dtype=torch.float32, requires_grad=True)
 
-# 构建相同类型的张量
+# 转下三角矩阵
+torch.tril(torch.ones(4,4))
 
+
+# 构建相同类型的张量
 print(torch.zeros_like(m))  # 零张量
 print(torch.ones_like(m))  # 单位张量
 print(torch.rand_like(m))  # 随机张量
@@ -53,6 +56,7 @@ x = torch.from_numpy(x) # 转tensor
 x = x.numpy() # 转 numpy
 
 # 改变形状 .reshape
+
 A = torch.arange(12.0).reshape(3,4)
 
 # 插入维度
@@ -67,17 +71,22 @@ A = A.expand(3, -1)
 A = torch.tensor([1, 2, 3])
 A.repeat(1, 2, 2) # 三个参数分别代表三个维度repeat的次数
 
+# 复制张量为二维
+expanded_row = x.unsqueeze(0).expand(4, -1)  # 复制为4行，列数不变
+
 # 张量拼接
 torch.cat((A, B), dim=0) # 给定维度中张量拼接
 torch.stack((A, B), dim=1) # 沿新维度连接张量————形状必须一致 dim为的大小是2
 
 # 张量分块
+
 B1, B2 = torch.chunk(A, 2, dim=0) # 若不能整除时，则最后一块将最小
 D1, D2, D3 = torch.split(A, [1, 2, 3], dim=1) # 将张量分块，可指定每一块的大小（示例中大小为 1，2，3）
 
 # 张量运算
 
 # 比较
+
 torch.eq(A,B) # 判断相等———每个元素 tensor([True, True, True, True, True, True])
 torch.equal(A,B) # 判断相等———整体 True
 
@@ -86,6 +95,7 @@ torch.gt(A, B) # 比较大于
 torch.isnan() # 判断是否为缺失值
 
 # 四则运算 （对应元素计算）
+
 print(A + B)
 print(A - B)
 print(A * B) # 点成
@@ -108,8 +118,7 @@ print(x)
 print(sum(x))
 print(torch.sum(x))
 
-# >>> tensor([[1., 2.],
-# >>> [3., 4.]])
+# >>> tensor([[1., 2.], [3., 4.]])
 # >>> tensor([4., 6.])
 # >>> tensor(10.)
 
@@ -124,4 +133,3 @@ torch.mean(A, dim=1, keepdim=True)
 # keepdim=False：转变为一维的tensor输出。
 
 torch.std(A) # 求标准差
-
